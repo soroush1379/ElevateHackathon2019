@@ -56,7 +56,7 @@ def compare_color(x1, y1, x2, y2):
     return True
 
 
-def checkChairs(input_address, reference_address):
+def checkChairs(input_address, reference_address, results={}):
     global img_in
     global img_ref
     global chairs
@@ -94,4 +94,5 @@ def checkChairs(input_address, reference_address):
 
         index = index + 1
 
+    results['empty_seats'] = output.copy()
     return output
