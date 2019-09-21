@@ -2,7 +2,7 @@ import numpy as np
 import cv2
 
 
-window_main = 'Charis'
+window_main = 'Chairs'
 img_in = cv2.imread('chairs.jpg', 1)
 img_out = np.array(img_in)
 dx = 2
