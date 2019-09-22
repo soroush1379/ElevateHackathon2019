@@ -1,8 +1,23 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { ExpoLinksView } from '@expo/samples';
+import { Button, Text } from 'native-base';
+import { Auth } from 'aws-amplify';
 
 export default function LinksScreen() {
+  let logout = (
+    <Button onPress={() => {
+      Auth.signOut().then(res => {
+        console.log(res)
+      })
+    }}
+    
+    style={{margin:10}}>
+      <Text>Sign out</Text>
+
+    </Button>
+  )
+
   return (
     <ScrollView style={styles.container}>
       {/**
@@ -10,6 +25,7 @@ export default function LinksScreen() {
        * we just wanted to provide you with some helpful links.
        */}
       <ExpoLinksView />
+      {logout}
     </ScrollView>
   );
 }
