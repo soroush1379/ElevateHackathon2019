@@ -1,0 +1,35 @@
+{
+	"providers": {
+		"awscloudformation": {
+			"AuthRoleName": "openspot-dev-20190921175727-authRole",
+			"UnauthRoleArn": "arn:aws:iam::066677838654:role/openspot-dev-20190921175727-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::066677838654:role/openspot-dev-20190921175727-authRole",
+			"Region": "us-east-2",
+			"DeploymentBucketName": "openspot-dev-20190921175727-deployment",
+			"UnauthRoleName": "openspot-dev-20190921175727-unauthRole",
+			"StackName": "openspot-dev-20190921175727",
+			"StackId": "arn:aws:cloudformation:us-east-2:066677838654:stack/openspot-dev-20190921175727/cf110e20-dcba-11e9-8956-025282f53354"
+		}
+	},
+	"auth": {
+		"openspot3d705ee2": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/openspot-dev-20190921175727-deployment/amplify-cfn-templates/auth/openspot3d705ee2-cloudformation-template.yml",
+				"logicalId": "authopenspot3d705ee2"
+			},
+			"lastPushTimeStamp": "2019-09-21T22:04:56.393Z",
+			"output": {
+				"AppClientSecret": "nqp5bi3lfffkcd5sqqgs7jipb13f00bml4s24ibn75rqfgv92uv",
+				"UserPoolId": "us-east-2_5VUcLiO6r",
+				"AppClientIDWeb": "1aak33u9saujcolst1e2t1rd93",
+				"AppClientID": "70id9g38sukp2imaipmuuo345",
+				"IdentityPoolId": "us-east-2:6df0d2ed-a9ae-452d-a4c9-2bf84edeaa47",
+				"IdentityPoolName": "openspot3d705ee2_identitypool_3d705ee2__dev",
+				"UserPoolName": "openspot3d705ee2_userpool_3d705ee2"
+			},
+			"lastPushDirHash": "BY01t5IJhZNvtcFjzfwlXjCCahc="
+		}
+	}
+}

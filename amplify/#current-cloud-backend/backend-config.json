@@ -1,0 +1,8 @@
+{
+	"auth": {
+		"openspot3d705ee2": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}
