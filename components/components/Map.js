@@ -84,8 +84,8 @@ export default class Map extends Component {
                         address: snapshot.key,
                         name: snapshot.val().name,
                         rooms: r,
-                        count: rCount
-
+                        count: rCount,
+                        image: snapshot.val().image
 
                     })
                 })
@@ -277,51 +277,58 @@ export default class Map extends Component {
                     <FlatList
                         data={this.state.data}
                         renderItem={({ item }) => (
-                            <TouchableOpacity onPress={() => {
+                            
+                                item.count > 0 &&
+                                (
+                                    <TouchableOpacity onPress={() => {
 
-                                this.setModalVisible(true)
-                                this.setState({
+                                        this.setModalVisible(true)
+                                        this.setState({
+        
+                                            selectedLocation: item.rooms
+                                        })
+                                    }} hidden>
+        
+        
+                                        <Card>
+                                            <CardItem>
+                                                <Left>
+                                                    <Thumbnail source={{ uri: `${item.image}` }} />
+                                                    <Body>
+                                                        <Text>{item.name}</Text>
+                                                        <Text note>{item.address}</Text>
+                                                    </Body>
+                                                </Left>
+                                            </CardItem>
+        
+                                            <CardItem>
+                                                <Left>
+                                                    <Button transparent>
+                                                        <Icon active name="thumbs-up" />
+                                                        <Text>12 Likes</Text>
+                                                    </Button>
+                                                </Left>
+                                                <Body>
+                                                    <Button transparent>
+                                                        <Icon active name="chatbubbles" />
+                                                        <Text>4 Comments</Text>
+                                                    </Button>
+                                                </Body>
+                                                <Right>
+        
+                                                    <Text style={{ color: 'green' }}>
+        
+                                                        {item.count} open spots left
+                                            {/* <Icon name='person' /> */}
+                                                    </Text>
+                                                </Right>
+                                            </CardItem>
+                                        </Card>
+                                    </TouchableOpacity>
+                                )
 
-                                    selectedLocation: item.rooms
-                                })
-                            }}>
-
-
-                                <Card>
-                                    <CardItem>
-                                        <Left>
-                                            <Thumbnail source={{ uri: 'https://tastet.ca/wp-content/uploads/2015/12/plus-beaux-cafes-montreal-cafe-parvis.png' }} />
-                                            <Body>
-                                                <Text>{item.name}</Text>
-                                                <Text note>{item.address}</Text>
-                                            </Body>
-                                        </Left>
-                                    </CardItem>
-
-                                    <CardItem>
-                                        <Left>
-                                            <Button transparent>
-                                                <Icon active name="thumbs-up" />
-                                                <Text>12 Likes</Text>
-                                            </Button>
-                                        </Left>
-                                        <Body>
-                                            <Button transparent>
-                                                <Icon active name="chatbubbles" />
-                                                <Text>4 Comments</Text>
-                                            </Button>
-                                        </Body>
-                                        <Right>
-
-                                            <Text style={{ color: 'green' }}>
-
-                                                {item.count} open spots left
-                                    {/* <Icon name='person' /> */}
-                                            </Text>
-                                        </Right>
-                                    </CardItem>
-                                </Card>
-                            </TouchableOpacity>
+                            
+                           
                         )
                         }
                     />
