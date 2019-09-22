@@ -5,8 +5,8 @@ import cv2
 window_main = 'Chairs'
 img_in = cv2.imread('chairs.jpg', 1)
 img_out = np.array(img_in)
-dx = 2
-dy = 2
+dx = 5
+dy = 5
 detection_tol = 10
 win_width = 1000
 win_height = 800
@@ -161,6 +161,5 @@ def main():
 
     return True
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

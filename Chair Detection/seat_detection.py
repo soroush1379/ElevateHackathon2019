@@ -7,8 +7,8 @@ import math
 chairs = []
 img_in = None
 img_ref = None
-precision = 15
-cam_mov = 50
+precision = 100
+cam_mov = 20
 cam_mov_precision = 5
 detection_tol = 10
 
@@ -56,7 +56,7 @@ def compare_color(x1, y1, x2, y2):
     return True
 
 
-def checkChairs(input_address, reference_address, results={}):
+def checkChairs(input_address, reference_address):
     global img_in
     global img_ref
     global chairs
@@ -94,5 +94,7 @@ def checkChairs(input_address, reference_address, results={}):
 
         index = index + 1
 
-    results['empty_seats'] = output.copy()
-    return output
+    return sum(output)
+
+if __name__ == '__main__':
+    print(checkChairs('detect.jpg', 'chairs.jpg'))

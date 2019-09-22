@@ -18,7 +18,7 @@ camera = PiCamera()
 camera.start_preview()
 try:
     while(True):
-        sleep(10)
+        sleep(2)
         camera.capture('detect.jpg')
         image = {'file': open('detect.jpg', 'rb')}
         r = requests.post('https://{0}.ngrok.io/detect'.format(sys.argv[1]), files = image)
