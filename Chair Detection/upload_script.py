@@ -1,8 +1,7 @@
-from firebase import Firebase
+import requests
 from picamera import PiCamera
 from time import sleep
-import seat_detection
-from threading import Thread
+import sys
 
 firebaseConfig = {
     "apiKey": "AIzaSyBBJ1YbYsq4fPBDDD6p_uWea0s1dY9wSWo",
@@ -14,23 +13,16 @@ firebaseConfig = {
     "appId": "1:770999334680:web:e097971893318d0005d06d"
     }
 
-firebase = Firebase(firebaseConfig)
-db = firebase.database()
-
 camera = PiCamera()
 
 camera.start_preview()
 try:
-    results = {"empty_seats": 3}
     while(True):
         sleep(3)
         camera.capture('detect.jpg')
-        thread = Thread(target=seat_detection.checkChairs, args=('detect.jpg', 'input.jpg', results))
-        thread.join()
-        print(results['empty_seats'])
+        image = {'file': open('detect.jpg', 'rb')}
+        r = requests.post('https://{0}.ngrok.io/detect'.format(sys.argv[1]), files = image)
 
 except KeyboardInterrupt:
     pass
 camera.stop_preview()
-
-db.child("40 St George Street").set({'2210':'0'})
