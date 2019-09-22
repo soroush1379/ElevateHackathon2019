@@ -18,6 +18,7 @@ import {
     Alert
 } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right, Toast } from 'native-base';
+import { CloudWatchLogs } from 'aws-sdk/clients/all';
 
 
 
@@ -28,7 +29,8 @@ export default class Map extends Component {
         errorMessage: null,
         data: [],
         modalVisible: false,
-        selectedLocation: []
+        selectedLocation: [],
+        rooms: []
     };
 
 
@@ -85,7 +87,9 @@ export default class Map extends Component {
                         name: snapshot.val().name,
                         rooms: r,
                         count: rCount,
-                        image: snapshot.val().image
+                        image: snapshot.val().image,
+                        lat: snapshot.val().lat,
+                        long: snapshot.val().long
 
                     })
                 })
@@ -206,28 +210,38 @@ export default class Map extends Component {
 
                     >
 
-                        {/* {this.state.data.map(item => 
+                        {this.state.data.map(item => 
                     
                             (
                                 <Marker
-                                    coordinate={{ latitude: testLat, longitude: -79.88302 }}
+                                    coordinate={{ latitude: item.lat, longitude: item.long }}
                                     title={item.name}
                                     description={item.address}
+                                    pinColor={'blue'}
+                                    key={item.name}
+                                    onPress={()=>{
+                                        console.log("pressed")
+                                        this.setModalVisible(true)
+                                        this.setState({
+        
+                                            selectedLocation: item.address
+                                        })
+                                    }}
                                 />
                             ))
-                        } */}
+                        }
 
                         <Marker coordinate={{ latitude: location.coords.latitude, longitude: location.coords.longitude }} title={'You'} description={'Human being'}>
                         </Marker>
-                        <Marker coordinate={{ latitude: 43.6571306, longitude: -79.388302 }} title={'Starbucks'} description={'555 University Ave, Toronto, ON M5G 1X8'} pinColor={'blue'}></Marker>
-                        <Marker coordinate={{ latitude: 43.658474, longitude: -79.385582 }} title={'Jimmys Coffee'} description={'84 Gerrard St W, Toronto, ON M5G 1Z4'} pinColor={'blue'}>
-                        </Marker>
+                      
                     </MapView>
                 </View>
             )
         } else {
             map = <Text>Enable location services to use this map</Text>
         }
+
+        let rooms = []
         return (
             <View style={{ flex: 1 }}>
 
@@ -241,9 +255,18 @@ export default class Map extends Component {
                                 Alert.alert('Modal has been closed.');
                             }}>
                             <View style={{ marginTop: 100, marginLeft: 30, marginRight:30}}>
-                            
-                                    {this.state.selectedLocation.map(room => (
-                                        <Card>
+
+                                    {this.state.data.filter(item => item.address === this.state.selectedLocation).map((location, index)=>{
+                               
+                                        rooms = location.rooms
+                                        console.log(rooms)
+                                        return (
+                                            <Text>{location.address}</Text>
+                                            
+                                        )
+                                    })}
+                                     {rooms.map(room => (
+                                        <Card key={room.roomName}>
                                             <CardItem>
                                                 <Body>
                                                     <Text>
@@ -256,6 +279,9 @@ export default class Map extends Component {
                                             </CardItem>
                                         </Card>
                                     ))}
+                              
+                                  
+                                   
 
 
                                 <Button
@@ -285,7 +311,7 @@ export default class Map extends Component {
                                         this.setModalVisible(true)
                                         this.setState({
         
-                                            selectedLocation: item.rooms
+                                            selectedLocation: item.address
                                         })
                                     }} hidden>
         
