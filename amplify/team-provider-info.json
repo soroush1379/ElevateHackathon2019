@@ -1,0 +1,19 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "openspot-dev-20190921175727-authRole",
+            "UnauthRoleArn": "arn:aws:iam::066677838654:role/openspot-dev-20190921175727-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::066677838654:role/openspot-dev-20190921175727-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "openspot-dev-20190921175727-deployment",
+            "UnauthRoleName": "openspot-dev-20190921175727-unauthRole",
+            "StackName": "openspot-dev-20190921175727",
+            "StackId": "arn:aws:cloudformation:us-east-2:066677838654:stack/openspot-dev-20190921175727/cf110e20-dcba-11e9-8956-025282f53354"
+        },
+        "categories": {
+            "auth": {
+                "openspot3d705ee2": {}
+            }
+        }
+    }
+}
